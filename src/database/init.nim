@@ -4,7 +4,7 @@ import models
 export sqlite.DbConn
 
 proc init_database*(): DbConn =
-  let db = open("spring92.db", "", "", "")
+  let db = open("autumn89.db", "", "", "")
   db.exec(sql"PRAGMA foreign_keys = ON")
 
   # Migrate: rename post.walker_id → post.walker for NORM FK

@@ -1,6 +1,6 @@
 {
-  "name": "Spring92 Challenge",
-  "short_name": "Spring92",
+  "name": "Autumn89 Challenge",
+  "short_name": "Autumn89",
   "scope": "/",
   "start_url": "/",
   "display": "standalone",
@@ -21,4 +21,3 @@
     }
   ]
 }
-

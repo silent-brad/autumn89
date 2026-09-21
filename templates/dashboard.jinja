@@ -16,7 +16,7 @@
 
 	<section>
 		<h1>Dashboard</h1>
-		<p>Track your progress towards the Spring92 goal!</p>
+		<p>Track your progress towards the Autumn89 goal!</p>
 	</section>
 	
 	{% if error_message.is_some() %}
@@ -36,7 +36,7 @@
 		<div class="card progress-overview">
 			<h2>Your Progress</h2>
 			<h3 class="numbers progress-num">{{fmtMiles(current_total.get())}}</h3>
-			<p class="numbers progress-num-label">out of 92 miles</p>
+			<p class="numbers progress-num-label">out of 89 miles</p>
 			{% if progress_percent.is_some() %}
 				{% let progress_percent = progress_percent.get() %}
 				{% importnimja "partials/_progress_bar.jinja" %}

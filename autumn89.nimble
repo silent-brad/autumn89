@@ -1,7 +1,7 @@
 # Package
 version       = "0.2.0"
 author        = "silent-brad"
-description   = "Spring92 Walking Challenge"
+description   = "Autumn89 Walking Challenge"
 license       = "MIT"
 bin           = @["src/main"]
 

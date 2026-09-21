@@ -17,10 +17,10 @@ proc main() =
   echo "Database initialized."
 
   let settings = new_settings(
-    app_name = "Spring92",
+    app_name = "Autumn89",
     port = Port(types.port),
     debug = false,
-    secret_key = PASSKEY & "spring92-session-key"
+    secret_key = PASSKEY & "autumn89-session-key"
   )
 
   var app = new_app(settings = settings)
@@ -29,7 +29,7 @@ proc main() =
   app.use(session_middleware(settings, max_age = 30 * 24 * 3600))
   register_routes(app)
 
-  echo "Starting Spring92 server on port ", types.port
+  echo "Starting Autumn89 server on port ", types.port
   app.run()
 
 when is_main_module:

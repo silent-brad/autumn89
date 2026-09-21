@@ -1,5 +1,5 @@
 {
-  description = "Spring92 Walking Challenge";
+  description = "Autumn89 Walking Challenge";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.flake-utils.url = "github:numtide/flake-utils";
@@ -14,7 +14,7 @@
       in
       {
         packages.default = buildNimPackage {
-          pname = "spring92";
+          pname = "autumn89";
           version = "0.3.0";
           src = ./.;
           # Run `nix shell nixpkgs#nim_lk -c nim_lk > lock.json` to generate lock file

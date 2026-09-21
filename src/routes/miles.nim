@@ -9,10 +9,10 @@ proc dashboard_page*(ctx: Context) {.async.} = gc_safe:
   if session.is_none: return
   let wid = session.get().walker_id
   let total = get_user_total_miles(db_conn, wid)
-  let pct = min(total / 92.0 * 100.0, 100.0)
+  let pct = min(total / 89.0 * 100.0, 100.0)
   var msg = none(string)
-  if "success=signup" in ctx.request.query: msg = some("Account created successfully! Welcome to Spring92!")
-  elif "success=login" in ctx.request.query: msg = some("Login successful! Welcome back to Spring92!")
+  if "success=signup" in ctx.request.query: msg = some("Account created successfully! Welcome to Autumn89!")
+  elif "success=login" in ctx.request.query: msg = some("Login successful! Welcome back to Autumn89!")
   const ps = 10
   let recent = get_user_recent_entries(db_conn, wid, ps + 1, 0)
   let has_more_entries = recent.len > ps
@@ -29,7 +29,7 @@ proc log_page*(ctx: Context) {.async.} = gc_safe:
   if session.is_none: return
   let total = get_user_total_miles(db_conn, session.get().walker_id)
   html_resp(ctx, render_template("dashboard.jinja", session,
-            current_total = some(total), progress_percent = some(min(total / 92.0 * 100.0, 100.0))))
+            current_total = some(total), progress_percent = some(min(total / 89.0 * 100.0, 100.0))))
 
 proc do_log_miles*(ctx: Context) {.async.} = gc_safe:
   let session = require_walker(ctx)
@@ -76,8 +76,8 @@ proc leaderboard_page*(ctx: Context) {.async.} = gc_safe:
   let session = require_login(ctx)
   if session.is_none: return
   var msg = none(string)
-  if "success=signup" in ctx.request.query: msg = some("Welcome to Spring92!")
-  elif "success=login" in ctx.request.query: msg = some("Welcome back to Spring92!")
+  if "success=signup" in ctx.request.query: msg = some("Welcome to Autumn89!")
+  elif "success=login" in ctx.request.query: msg = some("Welcome back to Autumn89!")
   const ps = 15
   let lb = get_leaderboard_paginated(db_conn, ps + 1, 0)
   let has_more = lb.len > ps

@@ -75,7 +75,7 @@ proc require_login*(ctx: Context): Option[SessionData] =
 proc to_display_entries*(leaderboard: seq[tuple[walker: Walker, total_miles: float]]): seq[Entry] =
   for e in leaderboard:
     result.add Entry(walker: e.walker, total_miles: e.total_miles,
-                     progress_percent: min(e.total_miles / 92.0 * 100.0, 100.0))
+                     progress_percent: min(e.total_miles / 89.0 * 100.0, 100.0))
 
 proc try_upload*(ctx: Context, field, dir: string): string =
   try:
