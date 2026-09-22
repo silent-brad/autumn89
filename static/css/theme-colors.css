@@ -1,16 +1,13 @@
 :root {
-  /* Pastel Spring Dreams */
+  --primary-color: #793836;
+  --secondary-color: #893f35;
 
-  /* Yellows */
-  --primary-color: #fff3a5;
-  --secondary-color: #e6dda2;
-  /* Blue-greens */
-  --accent-color: #b8e0cb;
-  --success-color: #d5ebe8;
-  /* Oranges */
-  --error-color: #e7c4a5;
-  --neutral-color: #ebe0d5;
-  --warning-color: #ebe0d5;
+  --accent-color: #839376;
+  --neutral-color: #a7bb96;
+
+  --error-color: #d09670;
+  --warning-color: #ebd8d5;
+  --success-color: #ebd8d5;
 
   /* Base colors for the application */
   --primary: var(--primary-oklch-500);
