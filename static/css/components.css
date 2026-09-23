@@ -550,16 +550,32 @@ button.avatar {
   padding: var(--space-lg);
   margin-bottom: var(--space-lg);
 
-  .post-image {
-    text-align: center;
+  .post-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--space-sm);
     margin: var(--space-sm) 0;
 
+    &.single-image {
+      grid-template-columns: 1fr;
+
+      img {
+        max-height: 500px;
+        width: auto;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .post-image {
+    text-align: center;
+
     img {
-      max-width: 80%;
-      height: auto;
-      margin: 0 auto;
-      display: block;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
       border-radius: var(--radius);
+      display: block;
     }
   }
 
@@ -572,18 +588,23 @@ button.avatar {
     margin-bottom: var(--space-sm);
     padding: var(--space-md);
 
+    .post-images {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: var(--space-xs);
+    }
+
     .post-image img {
-      max-width: 100%;
+      height: 120px;
+    }
+
+    .post-images.single-image img {
+      max-height: 400px;
     }
   }
 
   /* Desktop: spacious wide cards */
   @media (min-width: 769px) {
     padding: var(--space-lg);
-
-    .post-image img {
-      max-width: 100%;
-    }
   }
 }
 
@@ -634,6 +655,70 @@ button.avatar {
 .load-more-btn {
   width: 100%;
   margin-top: var(--space-md);
+}
+
+/* Image preview list in create form */
+.image-preview-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: var(--space-sm);
+  margin: var(--space-sm) 0;
+}
+
+.image-preview-thumb {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: grab;
+  border: 2px solid var(--color-border);
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
+
+  &.dragging {
+    opacity: 0.5;
+  }
+
+  &.drag-over {
+    border-color: var(--color-primary);
+    border-style: dashed;
+  }
+}
+
+.image-preview-img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  display: block;
+}
+
+.image-preview-remove {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--error-oklch-500);
+  color: var(--neutral-oklch-50);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+  min-height: auto;
+  margin: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  transition: transform 0.15s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 /* WYSIWYG Editor */

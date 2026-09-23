@@ -84,6 +84,6 @@ proc try_upload*(ctx: Context, field, dir: string): string =
     let safe = sanitize_filename(f.filename)
     if not is_safe_file_extension(safe): return ""
     if f.body.len > 10_485_760: return ""
-    let ext = if safe.contains("."): safe.split(".")[^1].to_lower_ascii() else: "jpg"
+    let ext = if safe.contains('.'): safe.split('.')[^1].to_lower_ascii() else: "jpg"
     save_uploaded_file(f.body, ext, dir)
   except: ""

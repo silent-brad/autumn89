@@ -80,13 +80,13 @@ define_renderer render_settings, "settings.jinja":
   success_message: ?string
 
 define_renderer render_posts_page, "posts.jinja":
-  posts: seq[Post]
+  posts: seq[PostWithImages]
   session: ?SessionData
   has_more: bool = false
   next_page: int = 2
 
 define_renderer render_post_feed, "post_feed.jinja":
-  posts: seq[Post]
+  posts: seq[PostWithImages]
   has_more: bool = false
   next_page: int = 2
   session: ?SessionData

@@ -25,7 +25,11 @@ type
   Post* {.table_name: "post".} = ref object of Model
     walker*: Walker
     text_content*: string
-    image_filename*: string
+    created_at*: string
+
+  PostImage* {.table_name: "post_image".} = ref object of Model
+    post_id* {.fk: Post.}: int64
+    filename*: string
     created_at*: string
 
 macro gen_new(T: typedesc): untyped =
@@ -60,3 +64,4 @@ gen_new(Family)
 gen_new(Walker)
 gen_new(MileEntry)
 gen_new(Post)
+gen_new(PostImage)

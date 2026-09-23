@@ -2,7 +2,7 @@
 <div class="wysiwyg-container">
 	<h3>Create a Post</h3>
 	<div id="post-response"></div>
-  <form hx-post="/post" hx-target="#post-response" hx-swap="innerHTML" hx-select="unset" hx-encoding="multipart/form-data" id="post-form">
+  <form id="post-form" enctype="multipart/form-data">
     <label for="text_content">
       <!-- WYSIWYG Toolbar -->
       <div id="wysiwyg-toolbar">
@@ -31,15 +31,19 @@
       ></textarea>
     </label>
     
-    <label for="image">
-      Add picture (optional)
+    <label for="images">
+      Add pictures (optional, max 4)
       <input
         type="file"
-        id="image"
-        name="image"
+        id="images"
+        name="images"
         accept="image/*"
+        multiple
       >
     </label>
+
+    <div id="image-preview-list" class="image-preview-list"></div>
+    <div id="image-preview-hint" class="text-muted" style="display:none;font-size:var(--font-size-xs);margin-top:var(--space-xs);">Drag to reorder. Click × to remove.</div>
     
     <br/>
     <div class="text-right">

@@ -58,12 +58,13 @@ proc delete_walker_account*(db: DbConn, walker_id: int64) =
       if file_exists(path):
         try: remove_file(path)
         except: discard
-    for row in rawdb.get_all_rows(db, rawdb.sql"SELECT image_filename FROM post WHERE walker = ? AND image_filename IS NOT NULL AND image_filename != ''", $walker_id):
+    for row in rawdb.get_all_rows(db, rawdb.sql"SELECT filename FROM post_image WHERE post_id IN (SELECT id FROM post WHERE walker = ?)", $walker_id):
       if row[0].len > 0:
         let path = "pictures" / row[0]
         if file_exists(path):
           try: remove_file(path)
           except: discard
-  rawdb.exec(db, rawdb.sql"DELETE FROM mile_entry WHERE walker_id = ?", $walker_id)
-  rawdb.exec(db, rawdb.sql"DELETE FROM post WHERE walker = ?", $walker_id)
-  rawdb.exec(db, rawdb.sql"DELETE FROM walker WHERE id = ?", $walker_id)
+    rawdb.exec(db, rawdb.sql"DELETE FROM post_image WHERE post_id IN (SELECT id FROM post WHERE walker = ?)", $walker_id)
+    rawdb.exec(db, rawdb.sql"DELETE FROM mile_entry WHERE walker_id = ?", $walker_id)
+    rawdb.exec(db, rawdb.sql"DELETE FROM post WHERE walker = ?", $walker_id)
+    rawdb.exec(db, rawdb.sql"DELETE FROM walker WHERE id = ?", $walker_id)

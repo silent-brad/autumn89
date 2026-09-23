@@ -1,28 +1,32 @@
-{% for post in posts %}
-	<div class="post-card" id="post-card-{{post.id}}">
+{% for pwi in posts %}
+	<div class="post-card" id="post-card-{{pwi.post.id}}">
 		<div class="post-header">
 			<div class="post-meta">
-				{% let name = post.walker.name %}
-				{% let avatar_filename = post.walker.avatar_filename %}
+				{% let name = pwi.post.walker.name %}
+				{% let avatar_filename = pwi.post.walker.avatar_filename %}
 				{% importnimja "partials/_walker_avatar.jinja" %}
-				<small class="numbers post-date">{{post.created_at.format_date_with_ordinal()}}</small>
+				<small class="numbers post-date">{{pwi.post.created_at.format_date_with_ordinal()}}</small>
 			</div>
-			{% if session.is_some() and post.walker.id == session.get().walker_id %}
+			{% if session.is_some() and pwi.post.walker.id == session.get().walker_id %}
 				<div class="post-actions">
-					<button class="secondary outline post-action-btn" onclick="editPost({{post.id}})">Edit</button>
+					<button class="secondary outline post-action-btn" onclick="editPost({{pwi.post.id}})">Edit</button>
 				</div>
 			{% endif %}
 		</div>
 		
-		<div class="post-text-content">{{post.text_content}}</div>
+		<div class="post-text-content">{{pwi.post.text_content}}</div>
 		
-		{% if post.image_filename != "" %}
-			<div class="post-image">
-				<img
-					src="/pictures/{{post.image_filename}}"
-					alt="Post image"
-					loading="lazy"
-				>
+		{% if pwi.images.len > 0 %}
+			<div class="post-images{% if pwi.images.len == 1 %} single-image{% endif %}">
+				{% for img in pwi.images %}
+					<div class="post-image" data-image-id="{{img.id}}">
+						<img
+							src="/pictures/{{img.filename}}"
+							alt="Post image"
+							loading="lazy"
+						>
+					</div>
+				{% endfor %}
 			</div>
 		{% endif %}
 	</div>

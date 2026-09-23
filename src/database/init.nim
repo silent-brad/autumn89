@@ -17,4 +17,5 @@ proc init_database*(): DbConn =
   db.create_tables(new_walker())
   db.create_tables(new_mile_entry())
   db.create_tables(new_post())
+  db.create_tables(new_post_image())
   db
