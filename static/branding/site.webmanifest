@@ -1,11 +1,6 @@
 {
-  "name": "Autumn89 Challenge",
+  "name": "Autumn89",
   "short_name": "Autumn89",
-  "scope": "/",
-  "start_url": "/",
-  "display": "standalone",
-  "theme_color": "#fff3a5",
-  "background_color": "#ffffff",
   "icons": [
     {
       "src": "/branding/web-app-manifest-192x192.png",
@@ -19,5 +14,8 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "theme_color": "#94745a",
+  "background_color": "#94745a",
+  "display": "standalone"
 }
