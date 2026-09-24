@@ -1,5 +1,5 @@
 import database/models
-export Walker, Family, MileEntry, Post
+export Walker, Family, MileEntry, Post, PostImage
 
 type
   SessionData* = object
@@ -14,6 +14,10 @@ type
     walker*: Walker
     total_miles*: float
     progress_percent*: float
+
+  PostWithImages* = object
+    post*: Post
+    images*: seq[PostImage]
 
 const
   static_dir* = "static"
