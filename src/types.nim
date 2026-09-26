@@ -18,6 +18,8 @@ type
   PostWithImages* = object
     post*: Post
     images*: seq[PostImage]
+    walker_total_miles*: float
+    walker_progress_percent*: float
 
 const
   static_dir* = "static"

@@ -2,6 +2,7 @@ import norm/sqlite
 from db_connector/db_sqlite as rawdb import nil
 import std/[strutils, os]
 import models
+import miles as db_miles
 import ../types
 
 proc create_post*(db: DbConn, walker_id: int64, text_content: string, image_filenames: seq[string]): int64 =
@@ -44,12 +45,14 @@ proc get_post_images*(db: DbConn, post_id: int64): seq[PostImage] =
 proc get_post_with_images*(db: DbConn, post_id: int64): PostWithImages =
   let post = get_post_by_id(db, post_id)
   let images = get_post_images(db, post_id)
-  PostWithImages(post: post, images: images)
+  PostWithImages(post: post, images: images, walker_total_miles: 0.0, walker_progress_percent: 0.0)
 
 proc hydrate_posts*(db: DbConn, posts: seq[Post]): seq[PostWithImages] =
   for post in posts:
     let images = get_post_images(db, post.id)
-    result.add(PostWithImages(post: post, images: images))
+    let total = get_user_total_miles(db, post.walker.id)
+    let pct = min(total / 89.0 * 100.0, 100.0)
+    result.add(PostWithImages(post: post, images: images, walker_total_miles: total, walker_progress_percent: pct))
 
 proc update_post_text*(db: DbConn, post_id: int64, text_content: string) =
   var post = new_post()
