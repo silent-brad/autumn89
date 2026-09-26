@@ -11,7 +11,7 @@ proc render_miles_chart*(data: MileDays): string =
     pad_bottom = 60
     pad_top = 10
     pad_right = 10
-    start_date_str = "2026-03-20"
+    start_date_str = "2026-09-22"
 
   let chart_w = width - pad_left - pad_right
   let chart_h = height - pad_top - pad_bottom
