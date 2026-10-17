@@ -11,6 +11,7 @@ proc get_user_total_miles*(db: DbConn, walker_id: int64): float =
   db.sum(MileEntry, "miles", dist = false, cond = "walker_id = ?", db_value(walker_id))
 
 proc get_user_miles_by_date*(db: DbConn, walker_id: int64): seq[tuple[date: string, miles: float]] =
+  result = @[]
   for row in rawdb.get_all_rows(db, rawdb.sql"SELECT DATE(logged_at) as date, SUM(miles) FROM mile_entry WHERE walker_id = ? GROUP BY DATE(logged_at) ORDER BY date ASC", $walker_id):
     result.add((row[0], parse_float(row[1])))
 

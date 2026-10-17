@@ -7,9 +7,7 @@
       "sha256": "0bi3kd41zjhx6kk1v7cxrgqdbsw2hf19q7zhqbfs2vk1axvaixf1",
       "url": "https://github.com/nim-lang/checksums/archive/0845c735a9746188b2257ee2cff672eb6ec26e8a.tar.gz",
       "ref": "v0.2.2",
-      "packages": [
-        "checksums"
-      ],
+      "packages": ["checksums"],
       "srcDir": "src"
     },
     {
@@ -19,9 +17,7 @@
       "sha256": "11dna09ccdhj3pzpqa04j7a95ibx907z6n1ff33yf0n92qa4x59z",
       "url": "https://github.com/nim-lang/db_connector/archive/29450a2063970712422e1ab857695c12d80112a6.tar.gz",
       "ref": "devel",
-      "packages": [
-        "db_connector"
-      ],
+      "packages": ["db_connector"],
       "srcDir": "src"
     },
     {
@@ -31,9 +27,7 @@
       "sha256": "0vh03jly6ynj3bbnqk190602n53r49x6plpdww4b8bd6ilkjwdzn",
       "url": "https://github.com/enthus1ast/nimja/archive/b7a25c62e63b459b9bfbef1de05199e4837c67d0.tar.gz",
       "ref": "0.10.1",
-      "packages": [
-        "nimja"
-      ],
+      "packages": ["nimja"],
       "srcDir": "src"
     },
     {
@@ -43,9 +37,7 @@
       "sha256": "03gl9cswc7mbyqh8xizgac8av81xxz7wbxqkyn4hx6v5r3dbcr7k",
       "url": "https://github.com/planety/Prologue/archive/406b076284d2edc9379bd7eb0510648050341b7c.tar.gz",
       "ref": "v0.6.8",
-      "packages": [
-        "prologue"
-      ],
+      "packages": ["prologue"],
       "srcDir": "src"
     },
     {
@@ -55,9 +47,7 @@
       "sha256": "07szladnxb3cdsknvska6gkx0viylxw5pfc4vg1ghmrna447qphq",
       "url": "https://github.com/moigagoo/norm/archive/78192dbcf720f74acc4ce6d80383ea463d5252c6.tar.gz",
       "ref": "2.8.7",
-      "packages": [
-        "norm"
-      ],
+      "packages": ["norm"],
       "srcDir": "src"
     },
     {
@@ -67,9 +57,7 @@
       "sha256": "1b666qws5sva3n5allin0ycvnqlzdjd7xzprpdvv632ccqddzcl9",
       "url": "https://github.com/nitely/nim-regex/archive/4593305ed1e49731fc75af1dc572dd2559aad19c.tar.gz",
       "ref": "v0.26.3",
-      "packages": [
-        "regex"
-      ],
+      "packages": ["regex"],
       "srcDir": "src"
     },
     {
@@ -79,9 +67,7 @@
       "sha256": "1v4rz42lwcazs6isi3kmjylkisr84mh0kgmlqycx4i885dn3g0l4",
       "url": "https://github.com/cheatfate/nimcrypto/archive/b3dbc9c4d08e58c5b7bfad6dc7ef2ee52f2f4c08.tar.gz",
       "ref": "v0.7.3^{}",
-      "packages": [
-        "nimcrypto"
-      ],
+      "packages": ["nimcrypto"],
       "srcDir": ""
     },
     {
@@ -91,9 +77,7 @@
       "sha256": "1xkyk8sqfhgmg5yaqpl10qva1zdfdjx0cw68fl6agskaad4af7i0",
       "url": "https://github.com/planety/cookiejar/archive/372b0ab1a6036a9f48f7540e7f3090e61796d947.tar.gz",
       "ref": "v0.3.1",
-      "packages": [
-        "cookiejar"
-      ],
+      "packages": ["cookiejar"],
       "srcDir": "src"
     },
     {
@@ -103,9 +87,7 @@
       "sha256": "1vyw5s60ylv4l8rkfbq9jzzq2qra2spbpv135nyjmbdij0f5p9bh",
       "url": "https://github.com/ringabout/httpx/archive/47cb5e79c6070153240f7395134885a114b0f039.tar.gz",
       "ref": "v0.3.8",
-      "packages": [
-        "httpx"
-      ],
+      "packages": ["httpx"],
       "srcDir": "src"
     },
     {
@@ -115,9 +97,7 @@
       "sha256": "1b0zks0qvfwi7x1vxxa0g3ipjky81lh5nqgiqnl1xn7i57ngxk3x",
       "url": "https://github.com/planety/logue/archive/fdad43b69bc4517a3595d1a28e86161e8cfca614.tar.gz",
       "ref": "v0.2.4",
-      "packages": [
-        "logue"
-      ],
+      "packages": ["logue"],
       "srcDir": "src"
     },
     {
@@ -127,9 +107,7 @@
       "sha256": "1j9pv270syz7w8b8fl9w5z5dkfy9ql76n6jjj3vmamxi9bh6d3ha",
       "url": "https://github.com/PhilippMDoerner/lowdb/archive/937ebb84bf08d24b97b2a9b8c86c37cd39fab520.tar.gz",
       "ref": "0.2.1",
-      "packages": [
-        "lowdb"
-      ],
+      "packages": ["lowdb"],
       "srcDir": "src"
     },
     {
@@ -139,9 +117,7 @@
       "sha256": "092z3glgdb7rmwajm7dmqzvralkm7ixighixk8ycf8sf17zm72ck",
       "url": "https://github.com/nitely/nim-unicodedb/archive/66f2458710dc641dd4640368f9483c8a0ec70561.tar.gz",
       "ref": "v0.13.2",
-      "packages": [
-        "unicodedb"
-      ],
+      "packages": ["unicodedb"],
       "srcDir": "src"
     },
     {
@@ -151,9 +127,7 @@
       "sha256": "1cd3n9l45z60gpv0rc84v1ngkjxn0i45vz0lzy63052m7m0j2rks",
       "url": "https://github.com/nitely/nim-unicodeplus/archive/f5d50197b266173dd4ca4c6fdd30361398433bb4.tar.gz",
       "ref": "v0.9.1",
-      "packages": [
-        "unicodeplus"
-      ],
+      "packages": ["unicodeplus"],
       "srcDir": "src"
     },
     {
@@ -163,9 +137,7 @@
       "sha256": "0c0k6s45pgga02wx7j9agf1f5lwwfxvxj94qy1m32cy8sx2chjgp",
       "url": "https://github.com/ringabout/ioselectors/archive/c9344036936a49db3ff1bce97e0896d6aabcf22d.tar.gz",
       "ref": "v0.2.0",
-      "packages": [
-        "ioselectors"
-      ],
+      "packages": ["ioselectors"],
       "srcDir": "src"
     },
     {
@@ -175,9 +147,7 @@
       "sha256": "0fl5dfs07w2wc0b8aq30fji23cplxmrj5vyf8mdn7gzz6gdyqamh",
       "url": "https://github.com/c-blake/cligen/archive/a9511be3b12f3117a142e3490dc5653933df7d42.tar.gz",
       "ref": "1.9.6",
-      "packages": [
-        "cligen"
-      ],
+      "packages": ["cligen"],
       "srcDir": ""
     },
     {
@@ -187,9 +157,7 @@
       "sha256": "007bkx8dwy8n340zbp6wyqfsq9bh6q5ykav1ywdlwykyp1n909bh",
       "url": "https://github.com/nitely/nim-segmentation/archive/6845c68cf00c1546f49d628ae11334acba966bfb.tar.gz",
       "ref": "v0.1.0",
-      "packages": [
-        "segmentation"
-      ],
+      "packages": ["segmentation"],
       "srcDir": "src"
     },
     {
@@ -199,10 +167,19 @@
       "sha256": "0h1nda2qil418zpn457g6xj6vzf7ccs53hmhh7yngk1rz9f47flq",
       "url": "https://github.com/ringabout/wepoll/archive/07fb549ecf656f9aab957b78fb0d1e2d2e47a76f.tar.gz",
       "ref": "v0.1.2",
-      "packages": [
-        "wepoll"
-      ],
+      "packages": ["wepoll"],
       "srcDir": "src"
+    },
+
+    {
+      "method": "fetchzip",
+      "path": "/nix/store/17gj9sw2hw818cbxvd6i94n734inm1vf-source",
+      "rev": "df8113dda4c2d74d460a8fa98252b0b771bf1f27",
+      "sha256": "1h7amas16sbhlr7zb7n3jb5434k98ji375vzw72k1fsc86vnmcr9",
+      "url": "https://github.com/arnetheduck/nim-results/archive/df8113dda4c2d74d460a8fa98252b0b771bf1f27.tar.gz",
+      "ref": "v0.5.1",
+      "packages": ["results"],
+      "srcDir": ""
     }
   ]
 }

@@ -46,6 +46,9 @@ proc update_walker_avatar*(db: DbConn, avatar_filename: string, walker_id: int64
   var walker = new_walker()
   db.select(walker, "id = ?", walker_id)
   walker.has_custom_avatar = true
+  let old_avatar_filename = walker.avatar_filename
+  try: remove_file(old_avatar_filename)
+  except: discard
   walker.avatar_filename = avatar_filename
   db.update(walker)
 

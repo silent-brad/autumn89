@@ -1,5 +1,5 @@
 import prologue
-import std/[options, strutils, hashes]
+import std/[options, strutils]
 import common
 import checksums/sha1
 import ../database/[models, families]

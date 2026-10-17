@@ -17,7 +17,7 @@
           pname = "autumn89";
           version = "0.3.0";
           src = ./.;
-          # Run `nix shell nixpkgs#nim_lk -c nim_lk > lock.json` to generate lock file
+          # Run `nix run nixpkgs#nim_lk -- lock.json` to generate lock file
           lockFile = ./lock.json;
           nimFlags = [
             "--deepcopy:on"

@@ -1,16 +1,19 @@
 import prologue
-import std/[options, strutils, os]
+import std/[strutils, os]
+import results
 import common
 import ../database/[posts as db_posts]
 import ../types, ../templates, ../utils
 
-proc collect_uploaded_images*(ctx: Context): seq[string] =
-  result = @[]
+proc collect_uploaded_images*(ctx: Context): Result[seq[string], string] =
+  var output: seq[string] = @[]
   for i in 0..<10:
     let field = "image_" & $i
     let filename = try_upload(ctx, field, "pictures")
-    if filename == "": break
-    result.add(filename)
+    if filename.is_err():
+      return err(filename.error())
+    output.add(filename.get())
+  return ok(output)
 
 proc posts_page*(ctx: Context) {.async.} = gc_safe:
   let session = require_login(ctx)
@@ -27,10 +30,12 @@ proc do_create_post*(ctx: Context) {.async.} = gc_safe:
   if session.is_none: return
   let text_content = sanitize_html(ctx.get_form_params("text_content").strip())
   let image_filenames = collect_uploaded_images(ctx)
-  if text_content.strip() == "" and image_filenames.len == 0:
+  if image_filenames.is_err():
+    html_resp(ctx, html_error(image_filenames.error())); return
+  if text_content.strip() == "" and image_filenames.get().len == 0:
     html_resp(ctx, html_error("Please provide text content or an image.")); return
   try:
-    discard create_post(db_conn, session.get().walker_id, text_content, image_filenames)
+    discard create_post(db_conn, session.get().walker_id, text_content, image_filenames.get())
     hx_redirect(ctx, "/posts")
   except Exception as e:
     echo "Error creating post: ", e.msg
@@ -58,7 +63,9 @@ proc do_edit_post*(ctx: Context) {.async.} = gc_safe:
 
     # Add new uploads
     let uploaded = collect_uploaded_images(ctx)
-    add_post_images(db_conn, post_id, uploaded)
+    if uploaded.is_err():
+      html_resp(ctx, html_error(uploaded.error())); return
+    add_post_images(db_conn, post_id, uploaded.get())
 
     # Update text
     update_post_text(db_conn, post_id, text_content)

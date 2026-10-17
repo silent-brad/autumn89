@@ -95,7 +95,7 @@ proc validate_name*(name: string): bool =
 
 proc is_safe_file_extension*(filename: string): bool =
   let ext = filename.split_file().ext.to_lower_ascii()
-  ext in @[".jpg", ".jpeg", ".png", ".gif", ".webp"]
+  ext in @[".jpg", ".jpeg", ".png", ".gif", ".webp", ".heic"]
 
 proc fmt_miles*(miles: float): string =
   let s = format_float(miles, ff_decimal, 1)

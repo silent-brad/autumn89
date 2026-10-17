@@ -1,6 +1,7 @@
 import prologue
-import std/[options, strutils, hashes]
+import std/[options, strutils]
 import common
+import results
 import checksums/sha1
 import ../database/[models, walkers as db_walkers, families]
 import ../types, ../templates, ../utils
@@ -23,9 +24,11 @@ proc do_settings*(ctx: Context) {.async.} = gc_safe:
   try: update_walker_name(db_conn, session.get().walker_id, name)
   except: html_resp(ctx, html_error("Error updating profile")); return
   let avatar = try_upload(ctx, "avatar", "avatars")
-  if avatar != "":
-    update_walker_avatar(db_conn, avatar, session.get().walker_id)
-    ctx.session["avatar_filename"] = avatar
+  if avatar.is_err():
+    html_resp(ctx, html_error(avatar.error())); return
+  if avatar.get() != "":
+    update_walker_avatar(db_conn, avatar.get(), session.get().walker_id)
+    ctx.session["avatar_filename"] = avatar.get()
   let cur_pw = ctx.get_form_params("current_password").strip()
   let new_pw = ctx.get_form_params("new_password").strip()
   let confirm_pw = ctx.get_form_params("confirm_new_password").strip()

@@ -1,6 +1,6 @@
-import strutils, os, strformat, random
+import os, strformat, random
 from times import format, now, get_time, to_unix
-import std/sha1
+import checksums/sha1
 
 randomize(get_time().to_unix() + get_current_process_id())
 
@@ -46,8 +46,8 @@ proc save_uploaded_file*(file_data: string, original_ext: string,
         magick_cmd = &"magick \"{temp_filepath}\" -auto-orient -resize 400x400^ -gravity center -crop 400x400+0+0 +repage \"{webp_filepath}\""
       else:
         magick_cmd = &"magick \"{temp_filepath}\" -auto-orient -resize 600 \"{webp_filepath}\""
-      let result = exec_shell_cmd(magick_cmd)
-      if result == 0 and file_exists(webp_filepath):
+      let success = exec_shell_cmd(magick_cmd)
+      if success == 0 and file_exists(webp_filepath):
         if file_exists(temp_filepath):
           remove_file(temp_filepath)
         return random_filename
