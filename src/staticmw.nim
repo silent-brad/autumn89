@@ -2,8 +2,6 @@ import prologue
 import std/[asyncdispatch, os, uri, strutils]
 
 proc root_static_middleware*(static_dir: string): HandlerAsync =
-  ## Serves files from `static_dir` at the URL root.
-  ## e.g. `/css/style.css` serves `static/css/style.css`
   result = proc(ctx: Context) {.async.} =
     let path = ctx.request.path.decode_url.strip(chars = {'/'}, trailing = false)
     let real_path = static_dir / path

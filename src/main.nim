@@ -24,8 +24,8 @@ proc main() =
   )
 
   var app = new_app(settings = settings)
-  app.use(root_static_middleware("static"))
-  app.use(static_file_middleware("static", "pictures", "avatars"))
+  app.use(root_static_middleware(get_env("STATIC_ROOT")))
+  app.use(static_file_middleware(get_env("STATIC_ROOT"), "pictures", "avatars"))
   app.use(session_middleware(settings, max_age = 30 * 24 * 3600))
   register_routes(app)
 

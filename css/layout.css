@@ -198,7 +198,7 @@ img {
 
 /* Landing page */
 .landing {
-  background-image: url("/branding/landing.webp?v=c51440de");
+  background-image: url("/assets/landing.webp?v=c51440de");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

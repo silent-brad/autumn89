@@ -23,4 +23,5 @@ type
 
 const
   static_dir* = "static"
-  port* = 9006
+  # change back to 8086
+  port* = 8904
