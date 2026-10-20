@@ -22,7 +22,8 @@ macro opt_proc(p: untyped): untyped =
       if def[^1].kind == nnk_empty:
         def[^1] = new_call(ident"none", base)
 
-macro define_renderer(name: untyped, tmpl: static string, body: untyped): untyped =
+macro define_renderer(name: untyped, tmpl: static string,
+    body: untyped): untyped =
   ## Generates a renderer proc from a colon-block param list.
   ## Use `?Type` for optional params that default to `none(Type)`.
   var formal_params = new_nim_node(nnk_formal_params)
@@ -34,7 +35,8 @@ macro define_renderer(name: untyped, tmpl: static string, body: untyped): untype
     of nnk_prefix:
       let base = inner[1]
       let opt_type = nnk_bracket_expr.new_tree(ident"Option", base)
-      formal_params.add new_ident_defs(param_name, opt_type, new_call(ident"none", base))
+      formal_params.add new_ident_defs(param_name, opt_type, new_call(
+          ident"none", base))
     of nnk_asgn:
       formal_params.add new_ident_defs(param_name, inner[0], inner[1])
     else:
@@ -42,7 +44,7 @@ macro define_renderer(name: untyped, tmpl: static string, body: untyped): untype
   let proc_name = postfix(name, "*")
   let base_dir = ident"base_dir"
   let proc_body = quote do:
-    compile_template_file(`tmpl`, `baseDir`)
+    compile_template_file(`tmpl`, `base_dir`)
   result = new_proc(proc_name, body = proc_body)
   result[3] = formal_params
   result.add_pragma(ident"gcsafe")

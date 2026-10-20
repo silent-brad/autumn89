@@ -19,7 +19,7 @@ proc render_miles_chart*(data: MileDays): string =
   # Build complete dataset from start_date to today with zero-filled gaps
   let start_date = parse(start_date_str, "yyyy-MM-dd")
   let end_date = now().format("yyyy-MM-dd").parse("yyyy-MM-dd")
-  
+
   var plot_data: MileDays = @[]
   var current = start_date
   while current <= end_date:
@@ -68,7 +68,8 @@ proc render_miles_chart*(data: MileDays): string =
   while tick_val <= effective_y_max + 0.001:
     let y = to_y(tick_val)
     svg.add fmt"""<line x1="{pad_left}" y1="{y:.1f}" x2="{width - pad_right}" y2="{y:.1f}" class="chart-grid"/>"""
-    let label = if tick_val == floor(tick_val): $int(tick_val) else: format_float(tick_val, ff_decimal, 1)
+    let label = if tick_val == floor(tick_val): $int(
+        tick_val) else: format_float(tick_val, ff_decimal, 1)
     svg.add fmt"""<text x="{pad_left - 4}" y="{y + 3.0:.1f}" text-anchor="end" class="chart-label chart-label-tick">{label}</text>"""
     tick_val += y_tick_step
 
@@ -81,7 +82,7 @@ proc render_miles_chart*(data: MileDays): string =
   svg.add fmt"""<text x="{x_label_x}" y="{height - 4}" text-anchor="middle" class="chart-label chart-label-axis">Date</text>"""
 
   # X-axis date labels (show every Nth to avoid overlap)
-  let max_labels = chart_w div 18  # ~18px per label for tighter spacing
+  let max_labels = chart_w div 18 # ~18px per label for tighter spacing
   let label_step = if plot_data.len <= max_labels: 1
                    else: (plot_data.len + max_labels - 1) div max_labels
   for i in 0 ..< plot_data.len:

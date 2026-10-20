@@ -79,18 +79,19 @@ proc to_display_entries*(leaderboard: seq[tuple[walker: Walker, total_miles: flo
     result.add Entry(walker: e.walker, total_miles: e.total_miles,
                      progress_percent: min(e.total_miles / 89.0 * 100.0, 100.0))
 
-proc try_upload*(ctx: Context, field, dir: string): Result[string, string] =
+proc try_upload*(ctx: Context, file: UploadFile, dir: string): Result[string, string] =
   try:
-    let f = ctx.get_upload_file(field)
-    if f.filename.len == 0: return err("")
-    let safe = sanitize_filename(f.filename)
+    let safe = sanitize_filename(file.filename)
+
     if not is_safe_file_extension(safe):
       return err("Image is not a safe file extension (only JPG, JPEG, PNG, GIF, WEBP, HEIC is accepted).")
 
-    if f.body.len > 20_485_760:
+    if file.body.len > 20_485_760:
       return err("Image is too big (must be under 20MB).")
 
     let ext = if safe.contains('.'): safe.split('.')[^1].to_lower_ascii() else: "jpg"
-    return ok(save_uploaded_file(f.body, ext, dir))
-  except:
+    return ok(save_uploaded_file(file.body, ext, dir))
+  except Exception as e:
+    echo e.msg
+    # NOTE: Prints "key not found: image_0"
     return err("Error uploading image")

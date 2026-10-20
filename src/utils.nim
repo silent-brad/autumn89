@@ -1,12 +1,13 @@
 import strutils, os
-from times import DateTime, format, monthday, parse
+from times import DateTime, format, month_day, parse
 
 proc html_escape*(s: string): string =
-  result = s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&#x27;")
+  result = s.replace("&", "&amp;").replace("<", "&lt;").replace(">",
+      "&gt;").replace("\"", "&quot;").replace("'", "&#x27;")
 
 proc sanitize_html*(html: string): string =
   result = html
-  
+
   # Remove script tags and content
   while true:
     let s = result.find("<script")
@@ -17,52 +18,53 @@ proc sanitize_html*(html: string): string =
     else:
       result.set_len(s)
       break
-  
+
   # Neutralize dangerous attributes
-  for attr in ["onclick", "onload", "onerror", "onmouseover", "onfocus", 
+  for attr in ["onclick", "onload", "onerror", "onmouseover", "onfocus",
                "onblur", "onkeypress", "onsubmit", "onchange"]:
     result = result.replace(attr & "=", "data-removed-" & attr & "=")
   result = result.replace("javascript:", "data-removed-javascript:")
   result = result.replace("data:", "data-removed:")
-  
+
   # Whitelist allowed tags
-  const allowed = ["b", "i", "u", "strong", "em", "a", "h1", "h2", "h3", 
-                   "h4", "h5", "h6", "blockquote", "cite", "ul", "ol", 
+  const allowed = ["b", "i", "u", "strong", "em", "a", "h1", "h2", "h3",
+                   "h4", "h5", "h6", "blockquote", "cite", "ul", "ol",
                    "li", "p", "br", "img"]
-  
+
   var i = 0
   while i < result.len:
     let open = result.find('<', i)
     if open == -1: break
     let close = result.find('>', open)
     if close == -1: break
-    
+
     let content = result[open+1..close-1].strip()
     if content.len == 0:
       i = close + 1
       continue
-    
+
     let is_close = content[0] == '/'
-    var name = (if is_close: content[1..^1] else: content).split(' ')[0].split('\t')[0].to_lower_ascii()
-    
+    var name = (if is_close: content[1..^1] else: content).split(' ')[0].split(
+        '\t')[0].to_lower_ascii()
+
     if name notin allowed:
       result.delete(open..close)
       continue
-    
+
     if name == "a":
       let h = content.find("href=")
       let tag = if h != -1: "a href=" & content[h+5..^1].split(' ')[0] & ">"
                 else: "a>"
       result = result[0..open] & tag & result[close+1..^1]
       i = open + tag.len
-      
+
     elif name == "img":
       var attrs: seq[string]
       let s = content.find("src=")
       if s != -1: attrs.add("src=" & content[s+4..^1].split(' ')[0])
       let a = content.find("alt=")
       if a != -1: attrs.add("alt=" & content[a+4..^1].split(' ')[0])
-      
+
       if attrs.len > 0:
         let tag = "img " & attrs.join(" ") & ">"
         result = result[0..open] & tag & result[close+1..^1]
@@ -73,7 +75,9 @@ proc sanitize_html*(html: string): string =
       i = close + 1
 
 proc sanitize_filename*(filename: string): string =
-  result = filename.replace("/", "").replace("\\", "").replace("..", "").replace(":", "").replace("*", "").replace("?", "").replace("\"", "").replace("<", "").replace(">", "").replace("|", "")
+  result = filename.replace("/", "").replace("\\", "").replace("..",
+      "").replace(":", "").replace("*", "").replace("?", "").replace("\"",
+      "").replace("<", "").replace(">", "").replace("|", "")
   if result.strip() == "": result = "unnamed_file"
 
 proc validate_email*(email: string): bool =
@@ -82,7 +86,8 @@ proc validate_email*(email: string): bool =
   if at_pos == -1 or at_pos == 0 or at_pos == email.len - 1: return false
   let domain_part = email[at_pos + 1 .. ^1]
   let dot_pos = domain_part.rfind('.')
-  if dot_pos == -1 or dot_pos == 0 or dot_pos == domain_part.len - 1: return false
+  if dot_pos == -1 or dot_pos == 0 or dot_pos == domain_part.len -
+      1: return false
   for c in email:
     if not (c.is_alpha_numeric() or c in "@.-_+"): return false
   return true
@@ -117,7 +122,7 @@ proc format_month_name*(date: string): string =
   ## Convert "YYYY-MM-DD" to "Apr 15th" style for tooltips
   try:
     let dt = parse(date, "yyyy-MM-dd")
-    let day = dt.monthday()
+    let day = dt.month_day()
     let suffix = if day mod 10 == 1 and day != 11: "st"
                  elif day mod 10 == 2 and day != 12: "nd"
                  elif day mod 10 == 3 and day != 13: "rd"

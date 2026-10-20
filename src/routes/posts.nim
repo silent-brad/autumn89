@@ -6,14 +6,17 @@ import ../database/[posts as db_posts]
 import ../types, ../templates, ../utils
 
 proc collect_uploaded_images*(ctx: Context): Result[seq[string], string] =
-  var output: seq[string] = @[]
-  for i in 0..<10:
+  var filenames: seq[string] = @[]
+  for i in 0..<5:
     let field = "image_" & $i
-    let filename = try_upload(ctx, field, "pictures")
-    if filename.is_err():
-      return err(filename.error())
-    output.add(filename.get())
-  return ok(output)
+    if ctx.get_form_params_option(field).is_some():
+      let file = ctx.get_upload_file(field)
+      let filename = try_upload(ctx, file, "pictures")
+      if filename.is_err():
+        return err(filename.error())
+      filenames.add(filename.get())
+    else: break
+  return ok(filenames)
 
 proc posts_page*(ctx: Context) {.async.} = gc_safe:
   let session = require_login(ctx)
@@ -31,6 +34,7 @@ proc do_create_post*(ctx: Context) {.async.} = gc_safe:
   let text_content = sanitize_html(ctx.get_form_params("text_content").strip())
   let image_filenames = collect_uploaded_images(ctx)
   if image_filenames.is_err():
+    echo "Error uploading image: ", image_filenames.error()
     html_resp(ctx, html_error(image_filenames.error())); return
   if text_content.strip() == "" and image_filenames.get().len == 0:
     html_resp(ctx, html_error("Please provide text content or an image.")); return
@@ -38,7 +42,6 @@ proc do_create_post*(ctx: Context) {.async.} = gc_safe:
     discard create_post(db_conn, session.get().walker_id, text_content, image_filenames.get())
     hx_redirect(ctx, "/posts")
   except Exception as e:
-    echo "Error creating post: ", e.msg
     html_resp(ctx, html_error("Failed to save your post."), Http500)
 
 proc do_edit_post*(ctx: Context) {.async.} = gc_safe:
