@@ -37,7 +37,6 @@ proc save_uploaded_file*(file_data: string, original_ext: string,
     let temp_filename = generate_random_filename(original_ext, directory)
     let temp_filepath = directory / temp_filename
     write_file(temp_filepath, file_data)
-    echo "Saved file: ", temp_filepath
     let webp_filepath = directory / random_filename
     try:
       var magick_cmd: string
@@ -47,16 +46,12 @@ proc save_uploaded_file*(file_data: string, original_ext: string,
         magick_cmd = &"magick \"{temp_filepath}\" -auto-orient -resize 600 \"{webp_filepath}\""
       let success = exec_shell_cmd(magick_cmd)
       if success == 0 and file_exists(webp_filepath):
-        echo "Successfully converted to WebP"
         if file_exists(temp_filepath):
           remove_file(temp_filepath)
-        echo "Successfully saved file: ", webp_filepath
         return random_filename
       else:
-        echo &"ImageMagick conversion failed: {magick_cmd}"
         raise new_exception(IOError, "ImageMagick conversion failed")
-    except Exception as e:
-      echo &"Image conversion failed: {e.msg}, saving original file"
+    except Exception:
       if file_exists(temp_filepath):
         remove_file(temp_filepath)
       let fallback_filename = generate_random_filename(original_ext, directory)

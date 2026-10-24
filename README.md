@@ -2,9 +2,9 @@
 
 > Note: this is originally a fork of my [Spring92 Challenge](https://github.com/silent-brad/spring92).
 
-Color scheme: <https://coolors.co/fff3a5-e6dda2-b8e0cb-d5ebe8-e7c4a5-ebe0d5>
+Color scheme: <https://coolors.co/793836-893f35-839376-a7bb96-d09670-ebd8d5>
 
-Made with Nim, HTMX, Nix
+Made with Nim, HTMX, Nix, SQLite
 
 ## Setup Commands
 

@@ -92,6 +92,4 @@ proc try_upload*(ctx: Context, file: UploadFile, dir: string): Result[string, st
     let ext = if safe.contains('.'): safe.split('.')[^1].to_lower_ascii() else: "jpg"
     return ok(save_uploaded_file(file.body, ext, dir))
   except Exception as e:
-    echo e.msg
-    # NOTE: Prints "key not found: image_0"
     return err("Error uploading image")

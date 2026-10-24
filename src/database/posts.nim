@@ -6,7 +6,6 @@ import miles as db_miles
 import ../types
 
 proc create_post*(db: DbConn, walker_id: int64, text_content: string, image_filenames: seq[string]): int64 =
-  echo "Creating post by ", walker_id
   db.exec(sql"BEGIN TRANSACTION")
   try:
     var walker = new_walker()

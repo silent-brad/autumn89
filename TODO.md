@@ -1,29 +1,37 @@
-- [ ] Add justfile
+- [x] Add justfile
 
-- [ ] Fix posts (they currently don't work for some reason)
+- [x] Fix posts (they currently don't work for some reason)
 
   - [x] Fix for create post
-  - [ ] Fix for edit post
+  - [x] Fix for edit post
 
-- [ ] Make it so that on editing a post, a new image is previewed
+- [x] Make it so that on editing a post, it displays the same for images as it does for create post
 
-- [ ] Setup automated deployments?
+- [x] Setup automated deployments?
 
   - When a commit is pushed to master, "server" will auto pull, build, and restart
   - Integrate into Nix with Busybox?
 
-- [ ] Add test suite
+- [x] Break up `components.css` into smaller files
 
-  - [ ] Add tests for `src`
-  - [ ] Add tests for JS (puppeteer)?
+- [x] Add test suite
 
-- [ ] Refactor JS (use modules)
-- [ ] Move JS to TS
-- [ ] Move some of JS to Nim
-- [ ] Test JS with Nim
-- [ ] Minify JS modules
+  - [x] Add tests for `src`
+  - [x] Add tests for `ts`
+  - [ ] Add more tests for Nim
 
-- [ ] Break up `components.css` into smaller files
+- [ ] Frontend
+
+  - [x] Minify JS modules
+  - [x] Move JS to TS
+  - [?] Move some of JS to Nim
+  - [?] Test JS with Nim
+
+- [ ] Write ARCH.md
+
+- [x] When editing a post, make the images draggable
+
+  - [x] When editing a post, make it so that uploading an image(s) add them next to the other images
 
 - [x] Move CSS/JS out of `static`
 - [x] Minify CSS
